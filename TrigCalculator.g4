@@ -1,7 +1,5 @@
 grammar TrigCalculator;
 
-prog: stat+ ;
-
 stat: expr NEWLINE          # printExpr
     | ID '=' expr NEWLINE   # assign
     | NEWLINE               # blank
