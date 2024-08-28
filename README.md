@@ -100,3 +100,8 @@ La salida será:
         NEWLINE : '\r'? '\n' ;
         WS  : [ \t]+ -> skip ;
     ```
+## Equipo
+
+- **Daniel Santiago Varela Guerrero**
+- **Miguel Angel Velasco**
+- **Sebastian Sabogal Castillo**
