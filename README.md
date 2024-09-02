@@ -49,18 +49,7 @@ Esta es una calculadora simple implementada en Java usando ANTLR v4, que soporta
     javac Calc.java TrigCalculator*.java
     ```
 ## USO
-1. **Crear un archivo de entrada:**
-
-    Crea un archivo de texto llamado t.expr (o cualquier otro nombre que prefieras) con las expresiones que deseas evaluar. Por ejemplo:
-   ```bash
-    sin(45)
-    cos(60)
-    tan(45)
-    a = 5
-    b = 6
-    a + b * 2
-   ```
-2. **Ejecutar la calculadora:**
+1. **Ejecutar la calculadora:**
 
 
     Ejecuta el programa con el archivo de entrada:
