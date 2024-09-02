@@ -1,27 +1,35 @@
 grammar TrigCalculator;
 
-prog: stat+ ;
+// Reglas léxicas (tokens)
+NUMERO: [0-9]+ ('.' [0-9]+)?;  // Soporte para números enteros y decimales
+ADD: '+';
+SUB: '-';
+MUL: '*';
+DIV: '/';
+POW: '^';
+EQUAL: '=';
+LPAREN: '(';
+RPAREN: ')';
+SIN: 'sin';
+COS: 'cos';
+TAN: 'tan';
 
-stat: expr NEWLINE          # printExpr
-    | ID '=' expr NEWLINE   # assign
-    | NEWLINE               # blank
-    ;
+// Manejo de espacios en blanco (opcional)
+WS: [ \t\r\n]+ -> skip;  // Ignorar espacios en blanco
 
-expr: expr op=('*'|'/') expr    # MulDiv
-    | expr op=('+'|'-') expr    # AddSub
-    | func '(' expr ')'         # trigFunc
-    | INT                       # int
-    | ID                        # id
-    | '(' expr ')'              # parens
-    ;
+// Reglas sintácticas
+inicio: (printExpr)* EOF;
 
-func: 'sin' | 'cos' | 'tan' ;
+printExpr: expresion EQUAL;
 
-MUL : '*' ;
-DIV : '/' ;
-ADD : '+' ;
-SUB : '-' ;
-ID  : [a-zA-Z]+ ;
-INT : [0-9]+ ;
-NEWLINE: [\r\n]+ ;
-WS : [ \t]+ -> skip ;
+expresion: termino ((ADD | SUB) termino)*;
+
+termino: factor ((MUL | DIV) factor)*;
+
+factor: base (POW factor)?;  // Añadimos la potencia
+
+base: NUMERO 
+    | LPAREN expresion RPAREN 
+    | trigFunc;
+
+trigFunc: (SIN | COS | TAN) LPAREN expresion RPAREN;
