@@ -20,16 +20,11 @@ WS: [ \t\r\n]+ -> skip;  // Ignorar espacios en blanco
 // Reglas sintácticas
 inicio: (printExpr)* EOF;
 
-printExpr: expresion EQUAL;
+printExpr: expresion;
 
-expresion: termino ((ADD | SUB) termino)*;
-
-termino: factor ((MUL | DIV) factor)*;
-
-factor: base (POW factor)?;  // Añadimos la potencia
-
-base: NUMERO 
-    | LPAREN expresion RPAREN 
-    | trigFunc;
+expresion:   termino ((ADD | SUB) termino)*;
+termino:     factor ((MUL | DIV) factor)*;
+factor:      (SUB)? base (POW factor)?;
+base:        NUMERO | LPAREN expresion RPAREN | trigFunc;
 
 trigFunc: (SIN | COS | TAN) LPAREN expresion RPAREN;

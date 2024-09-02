@@ -1,4 +1,4 @@
-// Generated from /home/mustang/Codigos/lenguajes/ANTLR4-CALCULADORA/TrigCalculator.g4 by ANTLR 4.13.1
+// Generated from TrigCalculator.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue", "this-escape"})
 public class TrigCalculatorParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.13.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -105,6 +105,11 @@ public class TrigCalculatorParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_inicio; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof TrigCalculatorVisitor ) return ((TrigCalculatorVisitor<? extends T>)visitor).visitInicio(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final InicioContext inicio() throws RecognitionException {
@@ -152,6 +157,11 @@ public class TrigCalculatorParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_printExpr; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof TrigCalculatorVisitor ) return ((TrigCalculatorVisitor<? extends T>)visitor).visitPrintExpr(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final PrintExprContext printExpr() throws RecognitionException {
@@ -195,6 +205,11 @@ public class TrigCalculatorParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expresion; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof TrigCalculatorVisitor ) return ((TrigCalculatorVisitor<? extends T>)visitor).visitExpresion(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final ExpresionContext expresion() throws RecognitionException {
@@ -266,6 +281,11 @@ public class TrigCalculatorParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_termino; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof TrigCalculatorVisitor ) return ((TrigCalculatorVisitor<? extends T>)visitor).visitTermino(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final TerminoContext termino() throws RecognitionException {
@@ -328,6 +348,11 @@ public class TrigCalculatorParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_factor; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof TrigCalculatorVisitor ) return ((TrigCalculatorVisitor<? extends T>)visitor).visitFactor(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final FactorContext factor() throws RecognitionException {
@@ -389,6 +414,11 @@ public class TrigCalculatorParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_base; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof TrigCalculatorVisitor ) return ((TrigCalculatorVisitor<? extends T>)visitor).visitBase(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final BaseContext base() throws RecognitionException {
@@ -454,6 +484,11 @@ public class TrigCalculatorParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_trigFunc; }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof TrigCalculatorVisitor ) return ((TrigCalculatorVisitor<? extends T>)visitor).visitTrigFunc(this);
+			else return visitor.visitChildren(this);
+		}
 	}
 
 	public final TrigFuncContext trigFunc() throws RecognitionException {
