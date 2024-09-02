@@ -1,26 +1,35 @@
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.util.Scanner;
 
 public class Calc {
-    public static void main(String[] args) throws Exception {
-        // Lee el archivo de entrada
-        String inputFile = null;
-        if (args.length > 0) inputFile = args[0];
-        CharStream input = CharStreams.fromFileName(inputFile);
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        // Crea el lexer, token stream y el parser a partir de la gramática
-        TrigCalculatorLexer lexer = new TrigCalculatorLexer(input);
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        TrigCalculatorParser parser = new TrigCalculatorParser(tokens);
+        while (true) {
+            System.out.print("Ingrese una expresión (o 'salir' para terminar): ");
+            String input = scanner.nextLine();
 
-        // Parsea el archivo y obtiene el árbol de sintaxis
-        ParseTree tree = parser.prog();
+            if (input.equalsIgnoreCase("salir")) {
+                break;
+            }
 
-        // Crea un visitante para evaluar las expresiones
-        EvalVisitor eval = new EvalVisitor();
-        eval.visit(tree);
+            // Crear el lexer y parser
+            CharStream stream = CharStreams.fromString(input);
+            TrigCalculatorLexer lexer = new TrigCalculatorLexer(stream);
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            TrigCalculatorParser parser = new TrigCalculatorParser(tokens);
+
+            // Parsear la entrada
+            ParseTree tree = parser.inicio();
+
+            // Crear el visitor y evaluar el árbol
+            TrigCalculatorVisitorImpl visitor = new TrigCalculatorVisitorImpl();
+            visitor.visit(tree);
+        }
+
+        scanner.close();
     }
 }
