@@ -2,6 +2,20 @@
 
 Esta es una calculadora simple implementada en Java usando ANTLR v4, que soporta operaciones aritméticas básicas y funciones trigonométricas. La calculadora puede interpretar y evaluar expresiones matemáticas que incluyen suma, resta, multiplicación, división, y funciones trigonométricas (`sin`, `cos`, `tan`).
 
+## Características
+
+- Soporta operaciones aritméticas: suma, resta, multiplicación, división y potencia.
+- Soporta funciones trigonométricas: seno (`sin`), coseno (`cos`) y tangente (`tan`).
+- Permite el uso de números negativos y paréntesis para agrupar operaciones.
+
+## Estructura del Proyecto
+
+- `TrigCalculator.g4`: Archivo de gramática ANTLR4.
+- `TrigCalculatorLexer.java`: Generado automáticamente por ANTLR4; contiene el lexer.
+- `TrigCalculatorParser.java`: Generado automáticamente por ANTLR4; contiene el parser.
+- `TrigCalculatorVisitorImpl.java`: Implementación del visitante para evaluar las expresiones.
+- `Calc.java`: Programa principal que lee expresiones desde la entrada estándar y evalúa usando `TrigCalculatorVisitorImpl.java`.
+
 ## Requisitos
 
 - [Java JDK](https://www.oracle.com/java/technologies/javase-downloads.html) 8 o superior
@@ -52,9 +66,11 @@ Esta es una calculadora simple implementada en Java usando ANTLR v4, que soporta
     Ejecuta el programa con el archivo de entrada:
 
    ```bash
-   java Calc t.expr
+   java Calc
    ```
-    La salida mostrará los resultados evaluados de las expresiones en el archivo de entrada.
+2. **Ingresar Expresiones**:
+   - Puede ingresar expresiones como `(-6 + 2)`, `5 - (-3)`, `sin(30)`, etc.
+   - Escriba `salir` para terminar el programa.
 
 ## Ejemplo de Salida 
 
@@ -72,33 +88,40 @@ La salida será:
     El archivo de gramática TrigCalculator.g4 define la sintaxis de la calculadora. Asegúrate de que esté en el directorio de trabajo y contenga la siguiente gramática:
 
     ```
-    antlr
+    grammar TrigCalculator;
 
-        grammar TrigCalculator;
+    // Reglas léxicas (tokens)
+    NUMERO: [0-9]+ ('.' [0-9]+)?;  // Soporte para números enteros y decimales
+    ADD: '+';
+    SUB: '-';
+    MUL: '*';
+    DIV: '/';
+    POW: '^';
+    EQUAL: '=';
+    LPAREN: '(';
+    RPAREN: ')';
+    SIN: 'sin';
+    COS: 'cos';
+    TAN: 'tan';
 
-        stat: expr NEWLINE             # printExpr
-            | ID '=' expr NEWLINE      # assign
-            | NEWLINE                  # blank
-            ;
+    // Manejo de espacios en blanco (opcional)
+    WS: [ \t\r\n]+ -> skip;  // Ignorar espacios en blanco
 
-        expr: expr op=('*'|'/') expr  # MulDiv
-            | expr op=('+'|'-') expr  # AddSub
-            | INT                     # int
-            | ID                      # id
-            | '(' expr ')'            # parens
-            | func '(' expr ')'       # trigFunc
-            ;
+    // Reglas sintácticas
+    inicio: (printExpr)* EOF;
 
-        func: 'sin' | 'cos' | 'tan'    # trigFunc
+    printExpr: expresion;
 
-        MUL : '*' ;
-        DIV : '/' ;
-        ADD : '+' ;
-        SUB : '-' ;
-        INT : [0-9]+ ;
-        ID  : [a-zA-Z]+ ;
-        NEWLINE : '\r'? '\n' ;
-        WS  : [ \t]+ -> skip ;
+    expresion: termino ((ADD | SUB) termino)*;
+
+    termino: factor ((MUL | DIV) factor)*;
+
+    factor: (SUB)? base (POW factor)?;
+
+    base: NUMERO | LPAREN expresion RPAREN | trigFunc;
+
+    trigFunc: (SIN | COS | TAN) LPAREN expresion RPAREN;
+
     ```
 ## Equipo
 
